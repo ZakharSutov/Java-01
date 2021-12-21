@@ -105,10 +105,10 @@ public class num18 {
         int length = in.nextInt();
         Vector3DArray arr = new Vector3DArray(length);
         for(int i = 0; i < length; i++){
-            double x0 = -10 + (Math.random() * 10);
-            double y0 = -10 + (Math.random() * 10);
-            double z0 = -10 + (Math.random() * 10);
-            arr.inputVector(i, x0, y0, z0);
+            double x0 = 0 + (int)(Math.random() * 10);
+            double y0 = 0 + (int)(Math.random() * 10);
+            double z0 = 0 + (int)(Math.random() * 10);
+            arr.inputVector(i+1, x0, y0, z0);
         }
         arr.printArr();
         System.out.println("Введите номер вектора, который хотите заменить.");
