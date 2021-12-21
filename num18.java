@@ -41,7 +41,7 @@ class Vector3DArray {
 
     public int searchVector(double x, double y, double z) {
         int j = -1, i = 0;
-        while (i < length || j == -1) {
+        while (i < length && j == -1) {
             if (arr[0][i] == x && arr[1][i] == y && arr[2][i] == z) {
                 j = i;
             }
@@ -122,10 +122,10 @@ public class num18 {
         System.out.println(search);
         System.out.print("Сумма всех векторов = ");
         arr.sumAllVectors().PrintV();
-        System.out.println("Введите размер массива с коэфицентами.");
+        System.out.println("Введите размер массива с коэффицентами.");
         int lengthCoef = in.nextInt();
         double[] coef = new double[lengthCoef];
-        System.out.println("Заполните массив с коэфицентами.");
+        System.out.println("Заполните массив с коэффицентами.");
         for(int j = 0; j < lengthCoef; j++){
             double c = in.nextDouble();
             coef[j] = c;

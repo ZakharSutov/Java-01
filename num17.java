@@ -30,7 +30,8 @@ class Vector3DProcessor {
     }
 
     public boolean Collin(Vector3D v1, Vector3D v2) {
-        return v1.GetX() / v2.GetX() == v1.GetY() / v2.GetY() && v1.GetZ() / v2.GetZ() == v1.GetY() / v2.GetY();
+        Vector3D v3 = new Vector3D();
+        return vectorMulti(v1, v2) == v3;
     }
 
 }
