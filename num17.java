@@ -1,5 +1,5 @@
 package ru.omsu;
-
+import static java.lang.Math.abs;
 import java.util.Scanner;
 
 class Vector3DProcessor {
@@ -30,10 +30,11 @@ class Vector3DProcessor {
     }
 
     public boolean Collin(Vector3D v1, Vector3D v2) {
-        Vector3D v3 = new Vector3D();
-        return vectorMulti(v1, v2) == v3;
+        double tmpX = v1.GetY() * v2.GetZ() - v1.GetZ() * v2.GetY();
+        double tmpY = -(v1.GetX() * v2.GetZ() - v1.GetZ() * v2.GetX());
+        double tmpZ = v1.GetX() * v2.GetY() - v1.GetY() * v2.GetX();
+        return Double.compare(abs(tmpX), 0) == 0 && Double.compare(abs(tmpY), 0) == 0 && Double.compare(abs(tmpZ), 0) == 0;
     }
-
 }
 
 public class num17 {
