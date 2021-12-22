@@ -61,7 +61,7 @@ public class num17 {
         System.out.println("Скалярное произведение: " + v.scalarMulti(v1, v2));
         System.out.println("Векторное произведение: ");
         v.vectorMulti(v1, v2).PrintV();
-        if (!v.Collin(v1, v2)) {
+        if (v.Collin(v1, v2) == true) {
             System.out.println("Вектора коллинеарны.");
         } else {
             System.out.println("Вектора не коллинеарны.");
