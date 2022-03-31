@@ -92,6 +92,9 @@ class Vector3DArray {
             arrPoint[i].SetX(x);
             arrPoint[i].SetY(y);
             arrPoint[i].SetZ(z);
+            x = p.GetX();
+            y = p.GetY();
+            z = p.GetZ();
         }
         return arrPoint;
     }
