@@ -5,16 +5,14 @@ import java.util.Scanner;
 import static java.lang.Math.sqrt;
 
 class Vector3DArray {
-    private final double[][] arr;
+    private final Vector3D[] arr;
     private final int length;
 
     public Vector3DArray(int length) {
         this.length = length;
-        arr = new double[3][length];
+        arr = new Vector3D[length];
         for (int i = 0; i < length; i++) {
-            arr[0][i] = 0;
-            arr[1][i] = 0;
-            arr[2][i] = 0;
+            arr[i] = new Vector3D();
         }
     }
 
@@ -22,16 +20,14 @@ class Vector3DArray {
         return length;
     }
 
-    public void inputVector(int i, double x, double y, double z) {
-        arr[0][i - 1] = x;
-        arr[1][i - 1] = y;
-        arr[2][i - 1] = z;
+    public void inputVector(int i, Vector3D v) {
+        arr[i] = v;
     }
 
     public double maxLength() {
         double max = 0, max1;
         for (int i = 0; i < length; i++) {
-            max1 = sqrt(arr[0][i] * arr[0][i] + arr[1][i] * arr[1][i] + arr[2][i] * arr[2][i]);
+            max1 = arr[i].length(); //sqrt(arr[i].GetX() * arr[i].GetX() + arr[i].GetY() * arr[i].GetY() + arr[i].GetZ() * arr[i].GetZ());
             if (max1 > max) {
                 max = max1;
             }
@@ -42,7 +38,7 @@ class Vector3DArray {
     public int searchVector(double x, double y, double z) {
         int j = -1, i = 0;
         while (i < length && j == -1) {
-            if (arr[0][i] == x && arr[1][i] == y && arr[2][i] == z) {
+            if (arr[i].GetX() == x && arr[i].GetY() == y && arr[i].GetZ() == z) {
                 j = i;
             }
             i++;
@@ -54,9 +50,9 @@ class Vector3DArray {
         double x = 0, y = 0, z = 0;
         Vector3D v = new Vector3D();
         for (int i = 0; i < length; i++) {
-            x += arr[0][i];
-            y += arr[1][i];
-            z += arr[2][i];
+            x += arr[i].GetX();
+            y += arr[i].GetY();
+            z += arr[i].GetZ();
         }
         v.Vector3D(x, y, z);
         return v;
@@ -71,29 +67,38 @@ class Vector3DArray {
                 y = 0;
                 z = 0;
             } else {
-                x += coeff[i] * arr[0][i];
-                y += coeff[i] * arr[1][i];
-                z += coeff[i] * arr[2][i];
+                x += coeff[i] * arr[i].GetX();
+                y += coeff[i] * arr[i].GetY();
+                z += coeff[i] * arr[i].GetZ();
             }
         }
         v.Vector3D(x, y, z);
         return v;
     }
 
-    public void arrPoint(Point3D p, double[][] arrpoint) {
-        arrpoint[0][0] = p.GetX();
-        arrpoint[1][0] = p.GetY();
-        arrpoint[2][0] = p.GetZ();
-        for (int i = 1; i <= length; i++) {
-            arrpoint[0][i] = arrpoint[0][i - 1] + arr[0][i - 1];
-            arrpoint[1][i] = arrpoint[1][i - 1] + arr[1][i - 1];
-            arrpoint[2][i] = arrpoint[2][i - 1] + arr[2][i - 1];
+    public Point3D[] arrPoint(Point3D p) {
+        double x, y, z;
+        Point3D[] arrPoint = new Point3D[length];
+        for (int i = 0; i < length; i++){
+            arrPoint[i] = new Point3D();
         }
+        x = p.GetX();
+        y = p.GetY();
+        z = p.GetZ();
+        for (int i = 0; i < length; i++) {
+            x += arr[i].GetX();
+            y += arr[i].GetY();
+            z += arr[i].GetZ();
+            arrPoint[i].SetX(x);
+            arrPoint[i].SetY(y);
+            arrPoint[i].SetZ(z);
+        }
+        return arrPoint;
     }
 
     public void printArr() {
         for (int i = 0; i < length; i++) {
-            System.out.printf("%.4f %.4f %.4f \n", arr[0][i], arr[1][i], arr[2][i]);
+            System.out.printf("%.4f %.4f %.4f \n", arr[i].GetX(), arr[i].GetY(), arr[i].GetZ());
         }
     }
 }
@@ -108,7 +113,8 @@ public class num18 {
             double x0 = 0 + (int)(Math.random() * 10);
             double y0 = 0 + (int)(Math.random() * 10);
             double z0 = 0 + (int)(Math.random() * 10);
-            arr.inputVector(i+1, x0, y0, z0);
+            Vector3D v = new Vector3D(x0, y0, z0);
+            arr.inputVector(i, v);
         }
         arr.printArr();
         System.out.println("Введите номер вектора, который хотите заменить.");
@@ -117,7 +123,8 @@ public class num18 {
         double x = in.nextDouble();
         double y = in.nextDouble();
         double z = in.nextDouble();
-        arr.inputVector(num, x, y, z);
+        Vector3D v1 = new Vector3D(x, y, z);
+        arr.inputVector(num, v1);
         arr.printArr();
         System.out.println("Наибольшая длина вектора = " + arr.maxLength());
         System.out.println("Введите координаты вектора, который хотите найти.");
@@ -143,10 +150,9 @@ public class num18 {
         double z2 = in.nextDouble();
         Point3D p = new Point3D();
         p.Point3D(x2, y2, z2);
-        double[][] arrpoint = new double[3][length + 1];
-        arr.arrPoint(p, arrpoint);
+        Point3D[] arrPoint = arr.arrPoint(p);
         for (int i = 0; i < length; i++) {
-            System.out.printf("%.4f %.4f %.4f \n", arrpoint[0][i], arrpoint[1][i], arrpoint[2][i]);
+            System.out.printf("%.4f %.4f %.4f \n", arrPoint[i].GetX(), arrPoint[i].GetY(), arrPoint[i].GetZ());
         }
 
     }

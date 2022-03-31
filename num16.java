@@ -47,6 +47,18 @@ class Vector3D {
         return sqrt(x*x+y*y+z*z);
     }
 
+    public void setY(double y) {
+        this.y = y;
+    }
+
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public void setZ(double z) {
+        this.z = z;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

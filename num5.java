@@ -12,7 +12,7 @@ public class num5 {
         double lim2 = in.nextDouble();
         double step = in.nextDouble();
         if (step > 0){
-            for (double i = lim1; i <= lim2 + step; i += step) {
+            for (double i = lim1; i < lim2 || Math.abs(i - lim2) < 1e-9; i += step) {
                 System.out.println(i + " = " + sin(i));
             }
         }
